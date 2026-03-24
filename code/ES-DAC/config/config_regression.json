@@ -1,0 +1,292 @@
+{
+  "datasetCommonParams": {
+    "dataset_root_dir": "D:/DL/MSA/paper_code/dataset",
+    "mosi": {
+      "aligned": {
+        "featurePath": "MOSI/Processed/aligned_50.pkl",
+        "seq_lens": [50, 50, 50],
+        "feature_dims": [768, 5, 20, 25],
+        "train_samples": 1284,
+        "num_classes": 3,
+        "language": "en",
+        "KeyEval": "Loss",
+        "missing_rate": [0.2, 0.2, 0.2],
+        "missing_seed": [1111, 1111, 1111]
+      },
+      "unaligned": {
+        "featurePath": "MOSI/Processed/unaligned_50.pkl",
+        "seq_lens": [50, 500, 375, 25],
+        "feature_dims": [768, 5, 20],
+        "train_samples": 1284,
+        "num_classes": 3,
+        "language": "en",
+        "KeyEval": "Loss",
+        "missing_rate": [0.2, 0.2, 0.2],
+        "missing_seed": [1111, 1111, 1111]
+      }
+    },
+    "mosei": {
+      "aligned": {
+        "featurePath": "MOSEI/Processed/aligned_50.pkl",
+        "seq_lens": [50, 50, 50],
+        "feature_dims": [768, 74, 35, 25],
+        "train_samples": 16326,
+        "num_classes": 3,
+        "language": "en",
+        "KeyEval": "Loss",
+        "missing_rate": [0.2, 0.2, 0.2],
+        "missing_seed": [1111, 1111, 1111]
+      },
+      "unaligned": {
+        "featurePath": "MOSEI/Processed/unaligned_50.pkl",
+        "seq_lens": [50, 500, 375],
+        "feature_dims": [768, 74, 35, 25],
+        "train_samples": 16326,
+        "num_classes": 3,
+        "language": "en",
+        "KeyEval": "Loss",
+        "missing_rate": [0.2, 0.2, 0.2],
+        "missing_seed": [1111, 1111, 1111]
+      }
+    },
+    "sims": {
+      "unaligned": {
+        "featurePath": "SIMS/Processed/unaligned_39.pkl",
+        "seq_lens": [39, 400, 55],
+        "feature_dims": [768, 33, 709, 25],
+        "train_samples": 1368,
+        "num_classes": 3,
+        "language": "cn",
+        "KeyEval": "Loss",
+        "missing_rate": [0.2, 0.2, 0.2],
+        "missing_seed": [1111, 1111, 1111]
+      }
+    },
+    "simsv2": {
+      "unaligned": {
+        "featurePath": "SIMSV2/Processed/unaligned.pkl",
+        "seq_lens": [50, 400, 55],
+        "feature_dims": [768, 33, 709, 25],
+        "train_samples": 2722,
+        "num_classes": 3,
+        "language": "cn",
+        "KeyEval": "Loss",
+        "missing_rate": [0.2, 0.2, 0.2],
+        "missing_seed": [1111, 1111, 1111]
+      }
+    }
+  },
+  "es_dac": {
+    "commonParams": {
+      "need_data_aligned": true,
+      "need_model_aligned": true,
+      "early_stop": 8,
+      "use_bert": true,
+      "use_finetune": true,
+      "attn_mask": true,
+      "update_epochs": 2
+    },
+    "datasetParams": {
+      "mosi": {
+        "batch_size": 32,
+        "learning_rate": 8e-4,
+        "bert_text_lr": 2e-5,
+        "bert_audio_lr": 2e-4,
+        "bert_video_lr": 2e-4,
+        "MFCC_lr": 5e-5,
+        "SMA_lr": 5e-5,
+        "log_lr": 1e-3,
+
+        "hidden_dims": [128, 32, 128],
+        "feature_lens": [50, 50, 50],
+        "dropouts": [0.2, 0.1, 0.1, 0.1],
+        "feature_layers":[3, 5, 2],
+        "num_heads": [2, 5, 5, 2],
+        "relu_dropout": 0.0,
+        "res_dropout": 0.0,
+        "embed_dropout": 0.2,
+        "patience": 5,
+        "all_seq_len": 50,
+
+        "text_sub_out": 64,
+        "text_bert_out": 64,
+
+
+        "audio_len": 500,
+        "audio_hidden_out": 64,
+
+        "video_len": 500,
+        "video_trans_out": 64,
+
+        "LLDs_hidden_out":[1, 1, 1, 1],
+        "LLD_dim": 64,
+        "LLDs_len": 1432,
+        "target_len":64,
+
+        "transformers": "bert",
+        "pretrained": "/public/home/sixinheyi/.cache/huggingface/transformers/bert-base-uncased-local"
+      },
+      "mosei": {
+        "batch_size": 128,
+        "learning_rate": 2e-4,
+        "bert_text_lr": 2e-5,
+        "bert_audio_lr": 1e-4,
+        "bert_video_lr": 1e-4,
+        "MFCC_lr": 5e-5,
+        "SMA_lr": 5e-5,
+        "log_lr": 1e-3,
+
+        "hidden_dims": [128, 32, 128],
+        "feature_lens": [50, 50, 50],
+        "dropouts": [0.1, 0.1, 0.1, 0.0],
+        "feature_layers":[3, 5, 2],
+        "num_heads": [2, 2, 5, 2],
+        "relu_dropout": 0.0,
+        "res_dropout": 0.0,
+        "embed_dropout": 0.2,
+        "patience": 5,
+        "all_seq_len": 50,
+
+        "text_sub_out": 64,
+        "text_bert_out": 64,
+
+
+        "audio_len": 500,
+        "audio_hidden_out": 64,
+
+        "video_len": 500,
+        "video_trans_out": 64,
+        
+        "LLDs_hidden_out":[1, 1, 1, 1],
+        "LLD_dim": 64,
+        "LLDs_len": 2276,
+        "target_len":64,
+
+        "transformers": "bert",
+        "pretrained": "/public/home/sixinheyi/.cache/huggingface/transformers/bert-base-uncased-local"
+      },
+      "sims": {
+        "batch_size": 64,
+        "learning_rate": 2e-4,
+        "bert_text_lr": 1e-5,
+        "bert_audio_lr": 1e-5,
+        "bert_video_lr": 1e-5,
+        "MFCC_lr": 5e-5,
+        "SMA_lr": 5e-5,
+        "log_lr": 5e-4,
+
+        "hidden_dims": [256, 32, 256],
+        "feature_lens": [39, 400, 55],
+        "dropouts": [0.3, 0.2, 0.1, 0.0],
+        "feature_layers":[3, 5, 2],
+        "num_heads": [2, 3, 5, 2],
+        "relu_dropout": 0.0,
+        "res_dropout": 0.0,
+        "embed_dropout": 0.1,
+        "patience": 5,
+        "all_seq_len": 64,
+
+        "text_sub_out": 64,
+        "text_bert_out": 64,
+
+
+        "audio_len": 500,
+        "audio_hidden_out": 64,
+
+        "video_len": 500,
+        "video_trans_out": 64,
+
+        "LLDs_hidden_out":[1, 1, 1, 1],
+        "LLD_dim": 64,
+        "LLDs_len": 925,
+        "target_len":64,
+
+        "transformers": "bert",
+        "pretrained": "/public/home/sixinheyi/.cache/huggingface/transformers/bert_ch"
+      },
+      "simsv2": {
+        "batch_size": 64,
+        "learning_rate": 1e-4,
+        "bert_text_lr": 2e-5,
+        "bert_audio_lr": 1e-5,
+        "bert_video_lr": 1e-5,
+        "MFCC_lr": 5e-5,
+        "SMA_lr": 5e-5,
+        "log_lr": 5e-4,
+
+        "hidden_dims": [64, 16, 64],
+        "feature_lens": [50, 400, 55],
+        "dropouts": [0.3, 0.2, 0.1, 0.0],
+        "feature_layers":[3, 5, 2],
+        "num_heads": [2, 5, 5, 2],
+        "relu_dropout": 0.0,
+        "res_dropout": 0.0,
+        "embed_dropout": 0.2,
+        "patience": 5,
+        "all_seq_len": 64,
+
+        "text_sub_out": 64,
+        "text_bert_out": 64,
+
+
+        "audio_len": 500,
+        "audio_hidden_out": 64,
+
+        "video_len": 500,
+        "video_trans_out": 64,
+
+        "LLDs_hidden_out":[1, 1, 1, 1],
+        "LLD_dim": 64,
+        "LLDs_len": 898,
+        "target_len":64,
+
+        "transformers": "bert",
+        "pretrained": "/public/home/sixinheyi/.cache/huggingface/transformers/bert_ch"
+
+
+      }
+  }
+},
+  "tfn": {
+    "commonParams": {
+      "need_data_aligned": false,
+      "need_model_aligned": false,
+      "need_normalized": true,
+      "early_stop": 8
+    },
+    "datasetParams": {
+      "mosi": {
+        "hidden_dims": [128, 32, 128],
+        "text_out": 32,
+        "post_fusion_dim": 64,
+        "dropouts": [0.3, 0.3, 0.3, 0.5],
+        "batch_size": 32,
+        "learning_rate": 0.001
+      },
+      "mosei": {
+        "hidden_dims": [128, 16, 128],
+        "text_out": 128,
+        "post_fusion_dim": 16,
+        "dropouts": [0.4, 0.4, 0.4, 0.4],
+        "batch_size": 128,
+        "learning_rate": 0.005
+      },
+      "sims": {
+        "hidden_dims": [128, 32, 128],
+        "text_out": 256,
+        "post_fusion_dim": 32,
+        "dropouts": [0.4, 0.4, 0.4, 0.4],
+        "batch_size": 32,
+        "learning_rate": 0.0005
+      },
+      "simsv2": {
+        "hidden_dims": [128, 32, 128],
+        "text_out": 128,
+        "post_fusion_dim": 32,
+        "dropouts": [0.3, 0.3, 0.3, 0.5],
+        "batch_size": 128,
+        "learning_rate": 0.002
+      }
+    }
+  }
+}
